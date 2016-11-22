@@ -8,6 +8,9 @@ module Bitfinex
     # @example:
     #   client.ticker
     def ticker(symbol = "btcusd")
+      if config.version == 2
+        symbol ||= 'tBTCUSD'
+      end
       get("pubticker/#{symbol}").body
     end
 
@@ -20,6 +23,9 @@ module Bitfinex
     #     puts tick.inspect
     #   end
     def listen_ticker(pair="BTCUSD", &block)
+      if config.version == 2
+        symbol ||= 'tBTCUSD'
+      end
       raise BlockMissingError unless block_given?
       register_channel pair: pair, channel: "ticker", &block
     end

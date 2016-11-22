@@ -7,9 +7,12 @@ module Bitfinex
     # @param params :timestamp [time] Only show trades at or after this timestamp.
     # @param params :limit_trades [int] Limit the number of trades returned. Must be >= 1.
     # @return [Array]
-    # @example: 
+    # @example:
     #   client.trades
     def trades(symbol="btcusd", params={})
+      if config.version == 2
+        symbol ||= 'tBTCUSD'
+      end
       check_params(params, %i{timestamp limit_trades})
       get("trades/#{symbol}", params: params).body
     end
@@ -22,9 +25,12 @@ module Bitfinex
     #   client.listen_trades do |trade|
     #     puts trade.inspect
     #   end
-    def listen_trades(pair="BTCUSD", &block)
+    def listen_trades(symbol="BTCUSD", &block)
+      if config.version == 2
+        symbol ||= 'tBTCUSD'
+      end
       raise BlockMissingError unless block_given?
-      register_channel pair:pair, channel: 'trades', &block
+      register_channel pair: symbol, channel: 'trades', &block
     end
 
   end

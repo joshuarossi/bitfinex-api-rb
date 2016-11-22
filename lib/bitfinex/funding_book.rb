@@ -14,5 +14,9 @@ module Bitfinex
       get("lendbook/#{currency}", params: params).body
     end
 
+    def listen_fundingbook(symbol='fUSD', prec='P0', freq='R0', len=25, @block)
+      raise BlockMissingError unless block_given?
+      register_channel pair:symbol, channel: 'book', prec: prec, freq: freq, len: len, &block
+    end
   end
 end
