@@ -19,7 +19,7 @@ module Bitfinex
 
     # Listen to the trades using websocket.
     #
-    # @param pair [string]
+    # @param symbol [string]
     # @param block [Block] The code to be executed when a new trade is executed
     # @example:
     #   client.listen_trades do |trade|

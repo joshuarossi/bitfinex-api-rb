@@ -12,8 +12,9 @@ module Bitfinex
         context ||= 'hist'
         symbol ||= 'funding.size:1m:fUSD'
         get("stats1/#{symbol}/#{context}").body
+      else
+        get("stats/#{symbol}").body
       end
-      get("stats/#{symbol}").body
     end
 
     def listen_stats(key="trades:1m:tBTCUSD", context = 'hist', &block)
