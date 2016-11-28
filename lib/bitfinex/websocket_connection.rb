@@ -29,7 +29,7 @@ module Bitfinex
           signature = sign(payload)
           add_callback(:auth, &block)
           save_channel_id(:auth, 0)
-          ws_safe_send({ 
+          ws_safe_send({
             event: "auth", 
             apiKey: config.api_key, 
             authSig: signature, 
@@ -200,6 +200,10 @@ module Bitfinex
           ws_safe_send([0, "oc", null, { id: order_id }])
         end
 
+        def config(flags)
+          ws_safe_send({ "event": "conf", flags: flags })
+        end
+        
         private
 
         def ws_opened(event)
