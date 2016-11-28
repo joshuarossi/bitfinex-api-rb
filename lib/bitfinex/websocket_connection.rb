@@ -184,6 +184,22 @@ module Bitfinex
           @ws.send(msg)
         end
 
+        # The order looks like this 
+        # { 
+        #   cid: CLIENT_ORDER_ID, 
+        #   type: "LIMIT", 
+        #   pair: "BTCUSD",  
+        #   amount: "0.1", 
+        #   price: "650" 
+        # }
+        def send_order(order)
+          ws_safe_send([0, "on", null, order])
+        end
+
+        def cancel_order(order_id)
+          ws_safe_send([0, "oc", null, { id: order_id }])
+        end
+
         private
 
         def ws_opened(event)
