@@ -96,6 +96,7 @@ module Bitfinex
     end
   
     def fingerprint(msg)
+      msg.delete :pair if msg[:symbol]
       msg.reject{|k,v| [:event,'chanId','event'].include?(k) }.
           inject({}){|h, (k,v)| h[k.to_sym]=v.to_s; h}
     end
@@ -112,6 +113,8 @@ module Bitfinex
     end
   
     def save_channel_id(chan,id)
+      binding.pry
+      puts callbacks[chan]
       callbacks[chan][:chan_id] = id
       chan_ids[id.to_i] = chan
     end

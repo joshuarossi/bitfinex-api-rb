@@ -25,7 +25,6 @@ module Bitfinex
        self.api_endpoint = "https://api.bitfinex.com/v1/"
        self.websocket_api_endpoint = "wss://api2.bitfinex.com:3000/ws"
        self.debug = false
-
        self.debug_connection = false
      end
   end
