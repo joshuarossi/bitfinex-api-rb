@@ -52,6 +52,7 @@ module Bitfinex
           @ws_auth = true
         end
       end
+    end
 
       def ws_unauth
         ws_safe_send({event: 'unauth'})
@@ -223,4 +224,4 @@ module Bitfinex
         end
       end
     end
-  end
+end
