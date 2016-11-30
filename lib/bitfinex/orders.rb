@@ -22,12 +22,12 @@ module Bitfinex
       price ||= 0.001 if type == "market" || type == "exchange market"
 
       params.merge!({
-        symbol: symbol,
-        amount: amount.to_s,
-        type: type,
-        side: side,
-        exchange: 'bitfinex',
-        price: price.to_s
+                      symbol: symbol,
+                      amount: amount.to_s,
+                      type: type,
+                      side: side,
+                      exchange: 'bitfinex',
+                      price: price.to_s
       })
       authenticated_post("order/new", params: params).body
     end
@@ -60,13 +60,13 @@ module Bitfinex
     def cancel_orders(ids=nil)
       case ids
       when Array
-          authenticated_post("order/cancel/multi", params: {order_ids: ids.map(&:to_i)}).body
+        authenticated_post("order/cancel/multi", params: {order_ids: ids.map(&:to_i)}).body
       when Numeric, String
-          authenticated_post("order/cancel", params: {order_id: ids.to_i}).body
+        authenticated_post("order/cancel", params: {order_id: ids.to_i}).body
       when NilClass
-          authenticated_post("order/cancel/all").body
+        authenticated_post("order/cancel/all").body
       else
-          raise ParamsError
+        raise ParamsError
       end
     end
 
@@ -118,5 +118,17 @@ module Bitfinex
       authenticated_post("orders").body
     end
 
+  end
+  module V2
+    module WS
+      module OrdersClient
+        def send_order(order)
+          ws_safe_send([0, "on", null, order])
+        end 
+        def cancel_order(order_id)
+          ws_safe_send([0, "oc", null, { id: order_id }])
+        end
+      end
+    end
   end
 end
