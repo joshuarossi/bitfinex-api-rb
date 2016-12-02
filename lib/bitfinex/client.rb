@@ -32,7 +32,7 @@ module Bitfinex
       include Bitfinex::WebsocketConnection
       include Bitfinex::Configurable
       include Bitfinex::V2::WS::TickerClient
-      # include Bitfinex::V2::WS::CandleClient
+      include Bitfinex::V2::WS::CandleClient
       config.websocket_api_endpoint = "wss://dev-prdn.bitfinex.com:2998/ws/2"
     end
   end
