@@ -26,6 +26,22 @@ module Bitfinex
       raise BlockMissingError unless block_given?
       register_channel pair:pair, channel: 'trades', &block
     end
-
+  module V2
+    module REST
+      module TradesClient
+        def trades(symbol = 'tBTCUSD')
+          get("trades/#{symbol}").body
+        end
+      end
+    end
+    module WS
+      module TradesClient
+        def listen_trades(symbol="tBTCUSD", &block)
+          block ||= -> (msg) { pring(msg) }
+          register_channel symbol: symbol, channel: "trades", &block
+        end
+      end
+    end
+  end
   end
 end
