@@ -113,10 +113,9 @@ module Bitfinex
     end
   
     def save_channel_id(chan,id)
-      binding.pry
-      puts callbacks[chan]
       callbacks[chan][:chan_id] = id
       chan_ids[id.to_i] = chan
+      binding.pry
     end
   
     def exec_callback_for(msg)

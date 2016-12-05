@@ -22,5 +22,6 @@ Gem::Specification.new do |spec|
   spec.add_runtime_dependency 'faye-websocket', '~> 0.10.3'
   spec.add_runtime_dependency 'json', '~> 1.8.3','>= 1.8.3'
   spec.add_runtime_dependency 'faraday_middleware', '~> 0.10', '>= 0.10.0'
+  spec.add_runtime_dependency 'pry'
   spec.add_development_dependency 'rspec-autotest'
 end

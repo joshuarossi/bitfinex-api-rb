@@ -26,6 +26,7 @@ module Bitfinex
       include Bitfinex::Configurable
       include Bitfinex::V2::REST::TickerClient
       include Bitfinex::V2::REST::CandleClient
+      include Bitfinex::V2::REST::TradesClient
       config.api_endpoint = "https://api.bitfinex.com/v2"
     end
     class WSClient
@@ -33,6 +34,7 @@ module Bitfinex
       include Bitfinex::Configurable
       include Bitfinex::V2::WS::TickerClient
       include Bitfinex::V2::WS::CandleClient
+      include Bitfinex::V2::REST::TradesClient
       config.websocket_api_endpoint = "wss://dev-prdn.bitfinex.com:2998/ws/2"
     end
   end

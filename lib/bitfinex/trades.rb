@@ -7,7 +7,7 @@ module Bitfinex
     # @param params :timestamp [time] Only show trades at or after this timestamp.
     # @param params :limit_trades [int] Limit the number of trades returned. Must be >= 1.
     # @return [Array]
-    # @example: 
+    # @example:
     #   client.trades
     def trades(symbol="btcusd", params={})
       check_params(params, %i{timestamp limit_trades})
@@ -26,6 +26,7 @@ module Bitfinex
       raise BlockMissingError unless block_given?
       register_channel pair:pair, channel: 'trades', &block
     end
+  end
   module V2
     module REST
       module TradesClient
@@ -42,6 +43,5 @@ module Bitfinex
         end
       end
     end
-  end
   end
 end
