@@ -38,7 +38,7 @@ module Bitfinex
     module WS
       module TradesClient
         def listen_trades(symbol="tBTCUSD", &block)
-          block ||= -> (msg) { pring(msg) }
+          block ||= -> (msg) { print(msg) }
           register_channel symbol: symbol, channel: "trades", &block
         end
       end
